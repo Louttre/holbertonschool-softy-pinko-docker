@@ -1,0 +1,28 @@
+version: '3'
+services:
+  proxy:
+    build:
+      context: proxy
+    image: softy-pinko-proxy:task5
+    ports:
+      - "80:80"
+    depends_on:
+      - front
+      - back
+    restart: always
+  back:
+    build:
+      context: back-end
+    image: softy-pinko-back-end:task5
+    ports: 
+      - "5252" 
+    restart: always
+  front:
+    build: 
+      context: front-end
+    image: softy-pinko-front-end:task5
+    ports: 
+      - "9000"
+    depends_on: 
+      - back
+    restart: always
